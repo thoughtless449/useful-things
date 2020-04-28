@@ -1,0 +1,284 @@
+<!--DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+<title>LinkIndex</title>
+	<script type="text/javascript" src="linksPrive.js"></script>
+
+<style>
+
+#wrapper {
+	width: 90%;
+	margin: 20px auto;
+	height:100%;
+	}
+
+#columns {
+	-webkit-column-width: 200px;;
+#	-webkit-column-count: 3;
+	-webkit-column-gap: 10px;
+	-webkit-column-fill: auto;
+	-moz-column-count: 3;
+	-moz-column-gap: 10px;
+	-moz-column-fill: auto;
+#	column-count: 3;
+	column-width: 200px;;
+	column-gap: 15px;
+	column-fill: auto;
+	align:top;
+}
+
+.pin {
+	display: inline-block;
+	background: #FEFEFE;
+	border: 2px solid #FAFAFA;
+	box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+	margin: 0 2px 15px;
+	-webkit-column-break-inside: avoid;
+	-moz-column-break-inside: avoid;
+	column-break-inside: avoid;
+	padding: 10px;
+	padding-bottom: 5px;
+	background: -webkit-linear-gradient(45deg, #FFF, #F9F9F9);
+	opacity: 1;
+	width:190px;
+	-webkit-transition: all .2s ease;
+	-moz-transition: all .2s ease;
+	-o-transition: all .2s ease;
+	transition: all .2s ease;
+}
+[if IE8].pin { position: absolute; top: 50%; left: 50%;}
+
+
+.pin img {
+	width: 100%;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 15px;
+	margin-bottom: 5px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+@font-face {
+    font-family: SanxFrancisco;
+    src: url("./fonts/YosemiteSanFranciscoFont-master/Text Face (alternate)/System San Francisco Text Medium.ttf") format('truetype');
+	font-weight: normal;
+    font-style: normal;
+} 
+@font-face {
+    font-family: SanFrancisco;
+    src: url("./fonts/YosemiteSanFranciscoFont-master/System San Francisco Display Medium.ttf") format('truetype');
+	font-weight: normal;
+    font-style: normal;
+} 
+@font-face {
+    font-family: SanFrancisco;
+    src: url("./fonts/YosemiteSanFranciscoFont-master/System San Francisco Display Bold.ttf") format('truetype');
+	font-weight: bold;
+    font-style: normal;
+} 
+@font-face {
+    font-family: SanxFrancisco;
+    src: url("./fonts/YosemiteSanFranciscoFont-master/System San Francisco Display Thin.ttf") format('truetype');
+	font-weight: lighter;
+    font-style: normal;
+} 
+
+* {
+	font-family: SanFrancisco,  "Segoe UI",  'Open Sans', Verdana, Arial, Helvetica, sans-serif;
+	-webkit-font-smoothing: -antialiased;
+	font-size:13px;
+}
+body {
+	#background: #f7f7f7;
+	text-align: center;
+
+}
+.links a, table.links a{
+	display: block;
+	text-decoration:none;
+	color: #333333;
+	font-weight: normal;
+}
+.links a:visited {
+	text-decoration:none;
+	color: #333333;
+}
+.links  a:hover, .topmenu a:hover {
+	text-decoration:underline;
+}
+.links h2 a:visited{
+	text-decoration:none;
+	color: white;
+}
+.contentWrapper {
+	background: #fff;
+	#border: 1px solid #DDD;
+	padding: 0;
+	display:inline-block;
+	text-align: left;
+	width:80%
+}
+h2 {
+	padding:4px;
+	margin-top: 0px;
+	margin-bottom:2px;
+	font-color:white;
+	background-color: #603cba;
+	color: white;
+	
+	
+	
+}
+.links h2 a {
+	textdecoration:none;
+	display:inline;
+	color: white ;
+}
+
+.topmenu {
+	#background-color: #00a300;
+	background-color: #007aff;
+	border-top: 1px solid white;
+	padding: 8px 25px;
+
+}
+.topmenu a {
+	text-decoration:none;
+	margin:10px;
+	color: white;
+}
+.header {
+	padding: 10px 20px 10px 10px;
+	overflow:hidden;
+	color:black;
+}
+.titleLine {
+	display:inline;
+	color:#007aff;
+	font-size: 2.2em;
+	font-weight: lighter;
+	
+}
+input, select, option {
+	font-weight: lighter;
+}
+/* the individual links */
+table.links{
+	padding-top:10px;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	border-spacing: 2px;
+}
+.searchBar {
+	float: right;
+}	
+</style>
+<script>
+function loadJS(file) {
+    // DOM: Create the script element
+    var jsElm = document.createElement("script");
+    // set the type attribute
+	jsElm.id="definedLinks"
+    jsElm.type = "application/javascript";
+    // make the script element load file
+    jsElm.src = file;
+    // finally insert the element to the body element in order to load the script
+    document.body.appendChild(jsElm);
+	jsElm.onload=function() {
+		paintLinks();
+	}
+}
+
+  var QueryString = function () {
+  // This function is anonymous, is executed immediately and 
+  // the return value is assigned to QueryString!
+  // e.g. print QueryString.key
+  var query_string = {};
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    	// If first entry with this name
+    if (typeof query_string[pair[0]] === "undefined") {
+      query_string[pair[0]] = pair[1];
+    	// If second entry with this name
+    } else if (typeof query_string[pair[0]] === "string") {
+      var arr = [ query_string[pair[0]], pair[1] ];
+      query_string[pair[0]] = arr;
+    	// If third or later entry with this name
+    } else {
+      query_string[pair[0]].push(pair[1]);
+    }
+  } 
+    return query_string;
+} ();
+
+// ensure all links are opened in a new browser window
+colors=["#5856d6", "#007aff", "#34aadc", "#5ac8fa","#4cd964",
+        "#ff2d55", "#ff3b30", "#ff9500", "#ffcc00", "#8e8e93"
+		];
+colors=colors.concat(colors);
+
+function paintLinks() {
+	var line=""
+	for (var n=0; n<links.topmenu.length; n++){
+		line+="<a target='_blank' href='"+links.topmenu[n].href+"'>"+links.topmenu[n].title+"</a>";
+	}
+	document.getElementById("topmenu").innerHTML=line;
+
+	var content="";
+	for (var i=0; i< links.items.length; i++){
+			content+="<div class='pin'><h2 style='background-color:"+colors[i]+" !important'>"+links.items[i].title+"</h2> <ul class='links'>";
+			for (var j=0; j<links.items[i].links.length; j++) {
+				content+="<li ><a target='_blank' href='"+links.items[i].links[j].href+"'>"+links.items[i].links[j].title+"</a></li>";
+			}
+			content += "</ul></div>";
+	}
+	document.getElementById("columns").innerHTML=content;
+}
+		
+window.onload = function() {
+	document.getElementById("query").focus();
+	if (QueryString.linksFile!=undefined) {
+		loadJS(QueryString.linksFile);
+		} else paintLinks();
+	} 
+</script>
+</head>
+<body>
+
+<div class="contentWrapper">
+<div class="header">
+	<div class="titleLine">LinkIndex</div>
+	<span class="searchBar">
+	<form id="search" onsubmit="window.open(document.forms['search'].service.options[document.forms['search'].service.selectedIndex].value+document.forms['search'].query.value);return false;">
+		<input id="query"  size="25"/>
+		<select id="zm_select"  name="service">
+		  <option value="https://www.google.com/search?q=">Google Internet</option>
+		  <option value="
+ https://ixquick.com/do/mypage.pl?prf=d3ece2ca684c38f0c5cb9e5c809fc62e&q=">IxQuick</option>
+		  <option value="https://duckduckgo.com/?kl=nl-nl&kp=-1&ki=-1&kg=p&q=">DuckDuckGo</option>
+
+	   </select>
+		<input id="zm_button" name="zm_button" type="submit"   accesskey="z" value="Zoeken"/>
+	</form>
+	</span>
+	<div style="clear:both"></div>
+</div> <!-- header -->	
+
+<div id="topmenu" class="topmenu">
+</div> <!-- topmenu -->
+
+<div id="wrapper" >
+	<div id="columns">
+	</div>
+</div>
+</div> <!-- contentWrapper-->
+</body>
+</html>
